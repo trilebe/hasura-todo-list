@@ -13,8 +13,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./services/controller/migrations:/hasura-migrations
-      - ./services/controller/metadata:/hasura-metadata
+      - ./controller/migrations:/hasura-migrations
+      - ./controller/metadata:/hasura-metadata
     depends_on:
       - postgres
     restart: always
