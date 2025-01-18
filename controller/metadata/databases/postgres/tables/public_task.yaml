@@ -11,6 +11,16 @@ object_relationships:
         remote_table:
           name: task
           schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-user-id
+      columns:
+        - description
+        - is_completed
+    comment: ""
 select_permissions:
   - role: user
     permission:
