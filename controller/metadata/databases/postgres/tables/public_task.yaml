@@ -33,3 +33,21 @@ select_permissions:
           _eq: x-hasura-user-id
       allow_aggregations: true
     comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - description
+        - is_completed
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+    comment: ""
