@@ -11,3 +11,15 @@ object_relationships:
         remote_table:
           name: task
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - description
+        - id
+        - is_completed
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+      allow_aggregations: true
+    comment: ""
