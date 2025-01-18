@@ -1,0 +1,29 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgis/postgis:14-master
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  controller:
+    container_name: controller
+    image: hasura/graphql-engine:v2.40.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./services/controller/migrations:/hasura-migrations
+      - ./services/controller/metadata:/hasura-metadata
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+volumes:
+  db_data:
