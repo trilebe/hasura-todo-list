@@ -25,5 +25,16 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+  go-backend:
+    container_name: go-backend
+    build: ./go-backend
+    ports:
+      - 3000:3000
+    environment:
+      DB_POSTGRES_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      SECRET: 3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R
+      TOKEN_EXPIRATION: 600
+    depends_on:
+      - postgres
 volumes:
   db_data:
