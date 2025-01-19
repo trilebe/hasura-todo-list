@@ -51,3 +51,15 @@ delete_permissions:
         user_id:
           _eq: x-hasura-user-id
     comment: ""
+event_triggers:
+  - name: notify_on_task_updated
+    definition:
+      enable_manual: false
+      update:
+        columns:
+          - is_completed
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{GO_BACKEND_URL}}/notifications'
