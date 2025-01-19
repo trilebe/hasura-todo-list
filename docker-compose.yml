@@ -27,6 +27,9 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
 
       GO_BACKEND_URL: http://go-backend:3000
+
+      HASURA_GRAPHQL_AUTH_HOOK: http://go-backend:3000/auth
+      HASURA_GRAPHQL_AUTH_HOOK_MODE: GET
   go-backend:
     container_name: go-backend
     build: ./go-backend
