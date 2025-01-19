@@ -1,6 +1,20 @@
-actions: []
+actions:
+  - name: login
+    definition:
+      kind: synchronous
+      handler: '{{GO_BACKEND_URL}}/auth'
+  - name: register
+    definition:
+      kind: synchronous
+      handler: '{{GO_BACKEND_URL}}/users'
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+    - name: RegisterRequest
+    - name: LoginRequest
+  objects:
+    - name: RegisterResponse
+    - name: RegisterResponseData
+    - name: LoginResponse
+    - name: LoginResponseData
   scalars: []
