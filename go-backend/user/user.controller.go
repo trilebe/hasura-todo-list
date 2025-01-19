@@ -2,6 +2,7 @@ package user
 
 import (
 	"go-todo-app/base"
+	"go-todo-app/utils/dtoutil"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,14 +13,14 @@ type controller struct {
 }
 
 func (c *controller) register(ctx *gin.Context) {
-	var request RegisterUserRequest
+	var request dtoutil.HasuraRequest[RegisterUserRequest]
 
 	if err := ctx.BindJSON(&request); err != nil {
 		ctx.Error(&Errors.InvalidRegisterPayload)
 		return
 	}
 
-	res, err := c.service.Register(request)
+	res, err := c.service.Register(request.Input.Params)
 	if err != nil {
 		ctx.Error(err)
 		return

@@ -19,7 +19,7 @@ func (s *Service) Register(payload RegisterUserRequest) (*RegisterUserResponse, 
 	user, err = s.repository.save(user)
 
 	return &RegisterUserResponse{
-		UserName: user.UserName,
+		UserName: user.Username,
 	}, err
 }
 

@@ -17,7 +17,7 @@ func (r *repository) save(user *User) (*User, error) {
 
 func (r *repository) findByUsername(username string) (*User, error) {
 	var user User
-	if err := r.db.Where(&User{UserName: username}).First(&user).Error; err != nil {
+	if err := r.db.Where(&User{Username: username}).First(&user).Error; err != nil {
 		return nil, &Errors.NotFound
 	}
 	return &user, nil

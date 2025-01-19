@@ -25,6 +25,8 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+
+      GO_BACKEND_URL: http://go-backend:3000
   go-backend:
     container_name: go-backend
     build: ./go-backend
