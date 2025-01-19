@@ -1,2 +1,3 @@
+- "!include public_notification.yaml"
 - "!include public_task.yaml"
 - "!include public_user.yaml"
