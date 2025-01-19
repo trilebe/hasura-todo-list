@@ -4,6 +4,7 @@ import (
 	"go-todo-app/base"
 	"go-todo-app/utils/dtoutil"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,6 +28,29 @@ func (c *controller) login(ctx *gin.Context) {
 	}
 
 	ctx.JSON(base.NewApiMessage(http.StatusOK, res))
+}
+
+func (c *controller) verifyToken(ctx *gin.Context) {
+	authHeader := ctx.Request.Header.Get("Authorization")
+	splitedStrings := strings.Split(authHeader, " ")
+
+	if len(splitedStrings) != 2 {
+		ctx.Error(&Errors.UnAuthorized)
+		return
+	}
+
+	authToken := splitedStrings[1]
+
+	payload, err := c.service.verifyToken(authToken)
+	if err != nil {
+		ctx.Error(err)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, VerifyTokenResponse{
+		XHasuraUserId: payload.Id,
+		XHasuraRole:   "user",
+	})
 }
 
 func newController() *controller {

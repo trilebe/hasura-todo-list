@@ -11,6 +11,7 @@ type router struct {
 
 func (r *router) Init() {
 	group := r.engine.Group("/auth")
+	group.GET("/", r.controller.verifyToken)
 	group.POST("/", r.controller.login)
 }
 

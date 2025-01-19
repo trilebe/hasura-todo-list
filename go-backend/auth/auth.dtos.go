@@ -11,4 +11,9 @@ type (
 	TokenPayload struct {
 		Id string
 	}
+
+	VerifyTokenResponse struct {
+		XHasuraUserId string `json:"x-hasura-user-id"`
+		XHasuraRole   string `json:"x-hasura-role"`
+	}
 )
